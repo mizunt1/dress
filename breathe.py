@@ -2,6 +2,7 @@ import RPi.GPIO as GPIO
 import time
 LedPin = 12
 LedPins = [12, 8, 5] 
+# pin numbers, not gpio numbers
 GPIO.setmode(GPIO.BOARD)
 # Numbers pins by physical location
 for LedPin in LedPins:
@@ -57,6 +58,7 @@ def glow_down(pins, pin):
     GPIO.output(pin[2], GPIO.HIGH)
     GPIO.cleanup()
 
-p = glow_up(LedPins)
-glow_down(p, LedPins)
+if __name__ == '__main__':
+    p = glow_up(LedPins)
+    glow_down(p, LedPins)
     
