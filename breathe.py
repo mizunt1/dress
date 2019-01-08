@@ -1,8 +1,12 @@
 import RPi.GPIO as GPIO
 import time
 LedPin = 12
-GPIO.setmode(GPIO.BOARD)       # Numbers pins by physical location
-GPIO.setup(LedPin, GPIO.OUT)   # Set pin mode as output
+LedPins = [12, 8, 5] 
+GPIO.setmode(GPIO.BOARD)
+# Numbers pins by physical location
+for LedPin in LedPins:
+    GPIO.setup(LedPin, GPIO.OUT)
+
 
 
 GPIO.output(LedPin, GPIO.LOW)  # Set pin to low(0V)
@@ -25,22 +29,34 @@ GPIO.output(LedPin, GPIO.LOW)  # Set pin to low(0V)
 #     GPIO.cleanup()
 
 
-def glow_up(pin):
-    p = GPIO.PWM(pin, 1000)
-    p.start(0)
+def glow_up(pins):
+    p1 = GPIO.PWM(pins[0], 1000)
+    p2 = GPIO.PWM(pins[1], 1000)
+    p3 = GPIO.PWM(pins[2], 1000)
+    p1.start(0)
+    p2.start(0)
+    p3.start(0)
     for dc in range(0, 101,5):
-        p.ChangeDutyCycle(dc)
+        p1.ChangeDutyCycle(dc)
+        p2.ChangeDutyCycle(dc)
+        p3.ChangeDutyCycle(dc)
         time.sleep(0.1)
-    return p
+    return [p1, p2, p3]
 
-def glow_down(p, pin):
+def glow_down(pins, pin):
     for dc in range(100, -1, -5):
-        p.ChangeDutyCycle(dc)
+        pins[0].ChangeDutyCycle(dc)
+        pins[1].ChangeDutyCycle(dc)
+        pins[2].ChangeDutyCycle(dc)
         time.sleep(0.1)
-    p.stop()
-    GPIO.output(pin, GPIO.HIGH)
+    pins[0].stop()
+    pins[1].stop()
+    pins[2].stop()
+    GPIO.output(pin[0], GPIO.HIGH)
+    GPIO.output(pin[1], GPIO.HIGH)
+    GPIO.output(pin[2], GPIO.HIGH)
     GPIO.cleanup()
 
-p = glow_up(LedPin)
-glow_down(p, LedPin)
+p = glow_up(LedPins)
+glow_down(p, LedPins)
     
