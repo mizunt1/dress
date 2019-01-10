@@ -30,7 +30,7 @@ if __name__ == "__main__":
         while True:
             dist = measurement()
             time.sleep(0.25)
-                
+            print(distance)
             # Reset by pressing CTRL + C
     except KeyboardInterrupt:
         print("Measurement stopped by User")

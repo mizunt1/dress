@@ -44,7 +44,13 @@ def glow_up(p1, p2, p3):
         time.sleep(0.1)
     return [p1, p2, p3]
 
-def glow_down(pins, pin):
+def glow_up_b(p1):
+    for dc in range(0, 101, 5):
+        p1.ChangeDutyCycle(dc)
+        time.sleep(0.1)
+    return p1
+
+def glow_down(pins):
     for dc in range(100, -1, -5):
         pins[0].ChangeDutyCycle(dc)
         pins[1].ChangeDutyCycle(dc)
@@ -57,6 +63,11 @@ def glow_down(pins, pin):
     #GPIO.output(pin[1], GPIO.HIGH)
     #GPIO.output(pin[2], GPIO.HIGH)
     # GPIO.cleanup()
+
+def glow_down_b(pins):
+    for dc in range(100, -1, -5):
+        pins.ChangeDutyCycle(dc)
+        time.sleep(0.2)
 
 if __name__ == '__main__':
     while True:
