@@ -9,7 +9,7 @@ def measurement():
     GPIO.setup(PIN_TRIGGER, GPIO.OUT)
     GPIO.setup(PIN_ECHO, GPIO.IN)
     GPIO.output(PIN_TRIGGER, GPIO.LOW)
-    time.sleep(1)
+    time.sleep(0.5)
     # print("Calculating distance")
     GPIO.output(PIN_TRIGGER, GPIO.HIGH)
     time.sleep(0.00001)
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     try:
         while True:
             dist = measurement()
-            time.sleep(0.25)
+            time.sleep(0.35)
             print(distance)
             # Reset by pressing CTRL + C
     except KeyboardInterrupt:

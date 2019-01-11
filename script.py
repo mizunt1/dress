@@ -1,9 +1,9 @@
-from breathe import glow_up, glow_down, glow_up_b, glow_down_b
+from breathe import glow_up, glow_down
 import RPi.GPIO as GPIO   
 from sensor import measurement
 import time
 red_pins_num = [12, 8, 5]
-blue_pins_num =  [33] # 22, 33
+blue_pins_num =  [29, 22] # 22, 33
 red_on = False
 blue_on = False
 GPIO.setmode(GPIO.BOARD)
@@ -44,7 +44,7 @@ try:
                 print("blue off")
                 blue_on = False
             
-        elif distance > 20 and distance < 30:
+        elif distance > 10 and distance < 30:
             if red_on:
                 pass
             else:
